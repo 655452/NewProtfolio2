@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brightness Slider</title>
+    <style>
+        .brightness-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .brightness-slider {
+            width: 100%;
+        }
+
+        .brightness-preview {
+            margin-top: 10px;
+        }
+
+        .brightness-element {
+            width: 50%;
+            height: 50vh;
+            background-color: #3498db;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Apply brightness filter based on slider value */
+        .brightness-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #3498db;
+            cursor: pointer;
+        }
+
+        .brightness-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 2px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: #ccc;
+            border-radius: 1.3px;
+        }
+
+        .brightness-slider:focus {
+            outline: none;
+        }
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+        img:hover{
+            transition: 1s ease-in-out;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="brightness-container">
+        <input type="range" class="brightness-slider" id="brightnessSlider" min="0" max="200" value="100">
+        <div class="brightness-preview">
+            <p>Preview</p>
+            <div class="brightness-element">
+                <img src="../laptop.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const brightnessSlider = document.getElementById("brightnessSlider");
+        const brightnessElement = document.querySelector(".brightness-element");
+
+        brightnessSlider.addEventListener("input", function () {
+            const brightnessValue = this.value / 100;
+            brightnessElement.style.filter = `brightness(${brightnessValue})`;
+        });
+    </script>
+</body>
+</html>

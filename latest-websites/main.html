@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+<link rel="stylesheet" href="./carasole.css">
+    <style>
+          
+body,html{
+    
+    scroll-behavior: smooth;
+}
+        .app-icons {
+            /* border: 2px solid red; */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 10vh auto;
+        }
+
+        .app-icon {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff6b6b, #ffb88c);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .app-icon:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #74ebd5, #9face6);
+        }
+
+        .app-icon i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            
+        }
+
+        .app-icon p {
+            text-align: center;
+            font-size: 18px;
+        }
+        
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.social-icons a {
+    margin: 0 10px;
+    text-decoration: none;
+    /* transform: scale(3); */
+    height: 100px;
+    width: 100px;
+    background: linear-gradient(45deg,rgb(201, 10, 42),blue,green);
+    
+}
+
+.social-icons img {
+    width: 100px; /* Adjust the size of the social media icons */
+    height: 100px;
+    border: 0; /* Remove image borders */
+}
+
+        footer{
+            width: auto;
+            height: 20vh;
+            background-color: black;
+
+        }
+        
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-links a {
+    text-decoration: none;
+    margin: 10px;
+    color: #fff;
+    transition: color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+.social-links img {
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    margin-bottom: 5px;
+}
+/* acrds */
+.card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 20px;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            transition: 0.5s;
+            height: 50vh;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image container styles */
+        .card-image {
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        /* Image styles */
+        .card-image img {
+            width: 100%;
+
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Card hover effect */
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Image rotate effect on hover */
+        .card:hover .card-image img {
+            transition: 1s ease-in-out;
+            transform: scale(1.2);
+        }
+
+        /* Card content styles */
+        .card-content {
+            padding: 10px;
+        }
+
+        /* Text styles */
+        .card-text {
+            font-size: 16px;
+        }
+        .card-wrap{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+   .card{
+    width: 45%;
+    height: 50%;
+    margin: 20px 0px;
+   }
+    /* Add more styles specific to tablets here */
+}
+
+
+/* Hero section styles */
+.hero {
+    background-image: url('../bitcoin.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.hero-image {
+    width: 300px; /* Adjust the size as needed */
+    height: auto;
+    border-radius: 50%; /* Rounded image */
+    margin-bottom: 20px;
+    margin: 20% auto;
+    transition: 1s ease-in-out;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+.hero-image:hover{
+    transform: scale(1.2);
+    transition: 1s ease-in-out;
+}
+.Hero-wrap{
+    margin: 0px auto;
+    /* border: 2px solid red; */
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 0;
+}
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.content2{
+          
+          padding: 20px;
+          border-radius: 20px;
+          
+        width: 40%;
+        }
+        .slide2{
+            /* border: 2px solid red; */
+        }
+        .slide2>img{
+            width: 30%;
+            
+            height: 60vh;
+          /* padding: 20px; */
+          margin: 5%;
+          border-radius: 20px;
+          box-shadow:  0px 4px 8px rgba(0,0,0,0.2);
+
+        }
+        label{
+          background-color: whitesmoke;
+        }
+
+        nav{
+          height: 9vh;
+          background-color: #4f80b3;
+        }
+        #menu-toogle>li{
+          margin: 10px 0px;
+        }
+        #menu-toogle>li>a{
+          padding: 10px;
+          
+        }
+        #menu-toogle>li>a:hover{
+     transition: 0.5s ease-in-out;
+     background-color: #255d99;
+     border-radius: 10px;
+        }
+        @media screen and (max-width: 868px) {
+          nav{
+            background-color: transparent;
+          }
+          #menu-toogle>li>a:hover{
+            background-color: transparent;
+
+          }
+          .slide2{
+            display: flex;
+            /* flex-direction: column; */
+          }
+          .slide2>img{
+            width: 80%;
+            height: 80%;
+            margin: 1%;
+          }
+          .content2{
+            width:50%;
+            overflow: hidden;
+            display: none;
+          }
+
+        }
+        
+
+    </style>
+    
+</head>
+<body>
+    <nav>
+        <div class="btn-wrap">
+            <button id="menu-btn">=</button>
+        </div>
+        <div class="nav-wrap">
+            <ul id="menu-toogle">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="./tailwind.html">Projects</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+           <div class="Hero-wrap">
+            <img src="../my2.png" alt="Your Name" class="hero-image">
+           </div>
+            <h1>Welcome to My Portfolio</h1>
+            <p>Explore My Projects and Creations</p>
+            <a href="#main" class="btn">View Projects</a>
+        </div>
+    </header>
+    <div class="carousel">
+        <input type="radio" name="slide" id="slide-1" checked>
+        <input type="radio" name="slide" id="slide-2">
+        <input type="radio" name="slide" id="slide-3">
+        
+        <div class="slides">
+          <div class="slide">
+            <img src="../bitcoin.jpg" alt="Slide 1">
+           
+          </div>
+          <div class="slide">
+            <img src="../laptop.jpg" alt="Slide 2">
+          </div>
+          <div class="slide">
+            <img src="../tech_pic.jpg" alt="Slide 3">
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <label for="slide-1"></label>
+          <label for="slide-2"></label>
+          <label for="slide-3"></label>
+        </div>
+      </div>
+    
+      
+      <div class="main" id="main">
+        <div class="app-icons">
+        <div class="app-icon">
+            <i class="fas fa-calculator"></i>
+            <p><a href="./basicCal.html">Calculator</a></p>
+        </div>
+        <div class="app-icon">
+            <i class="fas fa-sticky-note"></i>
+            <p><a href="./notes.html">Notes</a></p>
+        </div>
+        <div class="app-icon">
+            <i class="fas fa-calculator"></i>
+            <p><a href="./scientific.html">Scientific Calculator</a></p>
+        </div>
+        <div class="app-icon">
+            <i class="fas fa-question-circle"></i>
+            <p><a href="./QuizApp.html">Quiz</a></p>
+        </div>
+      
+        <div class="app-icon">
+            <i class="fas fa-chart-line"></i>
+            <p><a href="./Graph.html">Equation</a></p>
+        </div>
+        
+        <div class="app-icon">
+            <i class="fas fa-image"></i>
+            <p><a href="./ImageOper.html">Image Editor</a></p>
+        </div>
+    </div>
+      </div>
+
+      <div class="carousel">
+        <input type="radio" name="slide" id="slide2-1" checked>
+        <input type="radio" name="slide" id="slide2-2">
+        <input type="radio" name="slide" id="slide2-3">
+        
+        <div class="slides">
+          <div class="slide slide2">
+            <img src="../bitcoin.jpg" alt="Slide 1">
+            <div class="content2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quasi reiciendis quia, at repellendus nam fugiat reprehenderit sapiente assumenda perferendis, nobis accusantium, voluptatum ipsa iusto.
+             </div>
+          </div>
+          <div class="slide slide2">
+            <img src="../laptop.jpg" alt="Slide 2">
+            <div class="content2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quasi reiciendis quia, at repellendus nam fugiat reprehenderit sapiente assumenda perferendis, nobis accusantium, voluptatum ipsa iusto.
+             </div>
+          </div>
+          <div class="slide slide2">
+            <img src="../tech_pic.jpg" alt="Slide 3">
+            <div class="content2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quasi reiciendis quia, at repellendus nam fugiat reprehenderit sapiente assumenda perferendis, nobis accusantium, voluptatum ipsa iusto.
+             </div>
+          </div>
+        </div>
+        
+        
+        <div class="navigation">
+          <label for="slide2-1"></label>
+          <label for="slide2-2"></label>
+          <label for="slide2-3"></label>
+        </div>
+      </div>
+      <div class="card-wrap">
+        
+  
+        
+        <div class="card">
+            <div class="card-image">
+                <img src="../laptop.jpg" alt="Mobile Phone">
+            </div>
+            <div class="card-content">
+                <h2 class="card-text">Mobile Phone Model</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+                <img src="../instagram.jpg" alt="Mobile Phone">
+            </div>
+            <div class="card-content">
+                <h2 class="card-text">Mobile Phone Model</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+                <img src="../whatsapp.jpg" alt="Mobile Phone">
+            </div>
+            <div class="card-content">
+                <h2 class="card-text">Mobile Phone Model</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+                <img src="../bitcoin.jpg" alt="Mobile Phone">
+            </div>
+            <div class="card-content">
+                <h2 class="card-text">Mobile Phone Model</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+                <img src="../bg.jpg" alt="Mobile Phone">
+            </div>
+            <div class="card-content">
+                <h2 class="card-text">Mobile Phone Model</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+      </div>
+
+      <footer>
+        <section class="social-links">
+          <a href="https://www.whatsapp.com/YourPage" target="_blank">
+            <img style="background-color: rgb(51, 228, 113);"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@4/icons/whatsapp.svg" alt="WhatsApp">
+            <span>Whatsapp</span>
+          </a>
+          <a href="https://www.facebook.com/YourPage" target="_blank">
+            <img style="background-color: rgb(108, 175, 220);"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@4/icons/facebook.svg" alt="Facebook">
+            <span>Facebook</span>
+          </a>
+    
+    
+          <a href="https://github.com/655452/PortFolio0" target="_blank">
+            <img style="background-color: rgb(82, 239, 229);"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@4/icons/github.svg" alt="Twitter">
+            <span>Github</span>
+          </a>
+          <a href="https://www.instagram.com/YourPage" target="_blank">
+            <img style="background:linear-gradient(45deg,rgb(134, 11, 132),rgb(181, 63, 90));"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@4/icons/instagram.svg" alt="Instagram">
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.linkedin.com/in/asit-bakade-0b9619206/" target="_blank">
+            <img style="background-color: rgb(48, 165, 243);"
+              src="https://cdn.jsdelivr.net/npm/simple-icons@4/icons/linkedin.svg" alt="LinkedIn">
+            <span>LinkedIn</span>
+          </a>
+        </section>
+    
+    
+      </footer>
+    <script>
+      
+        const menu_toogle=document.getElementById("menu-toogle")
+        const menu_btn=document.getElementById("menu-btn")
+        // if(window.innerWidth)
+        console.log(window.innerWidth)
+        menu_btn.addEventListener("click",()=>{
+            console.log(menu_toogle.style.height)    
+                if(menu_toogle.style.height==='90vh'){
+                    menu_toogle.style.height='0vh'
+                    
+                }
+                else{
+                    menu_toogle.style.height='90vh'
+                    
+                    
+                }
+        })
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const targetId = this.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop,
+        behavior: 'smooth' // Add smooth scrolling behavior
+      });
+    }
+  });
+});
+        
+    </script>
+</body>
+</html>

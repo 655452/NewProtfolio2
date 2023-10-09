@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        /* Neumorphism styles (unchanged) */
+        /* Neumorphism styles */
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px #c0c0c0, -5px -5px 15px #ffffff;
+            padding: 20px;
+            width: 400px;
+        }
+
+        /* Notes styles */
+        .notes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .note {
+            background-color: #d0d0d0;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 3px 3px 5px #b0b0b0, -3px -3px 5px #ffffff;
+        }
+
+        /* Buttons */
+        .buttons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #60a3bc;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #777;
+        }
+        h1{
+            font-weight: 800;
+            margin: 10vh auto;
+            padding: 10px;
+            border-radius: 20px;
+            font-size: xx-large;
+            text-shadow: 0px 0px 5px 10px white;
+        }
+        h2{
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1> Notes Making App</h1>
+    <div class="container">
+        <h2>Notes</h2>
+        <div class="notes" id="notes">
+            <!-- Notes will be displayed here -->
+        </div>
+        <div class="buttons">
+            <button onclick="createNote()"><i class="fas fa-plus"></i> Create</button>
+            <button onclick="clearNotes()"><i class="fas fa-trash"></i> Clear All</button>
+        </div>
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById('notes');
+
+        // Load notes from local storage
+        const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+
+        savedNotes.forEach(note => createNoteElement(note));
+
+        function createNote() {
+            const noteText = prompt('Enter your note:');
+            if (noteText !== null && noteText !== '') {
+                const noteObject = { text: noteText, timestamp: new Date().toLocaleString() };
+                savedNotes.push(noteObject);
+                localStorage.setItem('notes', JSON.stringify(savedNotes));
+                createNoteElement(noteObject);
+            }
+        }
+
+        function createNoteElement(noteObject) {
+            const noteElement = document.createElement('div');
+            noteElement.className = 'note';
+            noteElement.innerHTML = `
+                <p>${noteObject.text}</p>
+                <div class="timestamp">${noteObject.timestamp}</div>
+                <div class="actions">
+                    <i class="fas fa-edit" onclick="updateNote(${savedNotes.indexOf(noteObject)})"></i>
+                    <i class="fas fa-trash-alt" onclick="deleteNote(${savedNotes.indexOf(noteObject)})"></i>
+                </div>
+            `;
+            notesContainer.appendChild(noteElement);
+        }
+
+        function updateNote(index) {
+            const updatedNoteText = prompt('Update your note:', savedNotes[index].text);
+            if (updatedNoteText !== null && updatedNoteText !== '') {
+                savedNotes[index].text = updatedNoteText;
+                savedNotes[index].timestamp = new Date().toLocaleString();
+                localStorage.setItem('notes', JSON.stringify(savedNotes));
+                refreshNotes();
+            }
+        }
+
+        function deleteNote(index) {
+            savedNotes.splice(index, 1);
+            localStorage.setItem('notes', JSON.stringify(savedNotes));
+            refreshNotes();
+        }
+
+        function clearNotes() {
+            notesContainer.innerHTML = '';
+            localStorage.removeItem('notes');
+            savedNotes.length = 0;
+        }
+
+        function refreshNotes() {
+            notesContainer.innerHTML = '';
+            savedNotes.forEach(note => createNoteElement(note));
+        }
+    </script>
+</body>
+</html>

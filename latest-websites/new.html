@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open New Window on Button Click</title>
+</head>
+<body>
+    <button id="openButton">Open New Window</button>
+
+    <script>
+        // Function to open a new window when the button is clicked
+        document.getElementById("openButton").addEventListener("click", function() {
+            // URL of the page you want to open in the new window
+            var newWindowURL = "https://example.com"; // Replace with your desired URL
+
+            // Open a new window or tab
+            window.open(newWindowURL, "_blank");
+        });
+    </script>
+</body>
+</html>

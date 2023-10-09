@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor</title>
+    <style>
+        body{
+            position: relative;
+
+        }
+        /* CSS styles go here */
+        /* You can style your user interface elements as needed */
+        .center,.image-wrap,main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            
+            z-index: 2;
+            position: absolute;
+            flex-wrap: wrap;
+           
+            flex-direction: column;
+        }
+        main button,main div ,main a,.file{
+            border-radius: 20px;
+            margin: 10px auto;
+            background-color: whitesmoke;
+            padding: 20px;
+            box-shadow: 0px 4px 8px  rgba(0, 0, 0, 0.2);
+        }
+        .image-wrap{
+            
+width: 100%;
+
+position: absolute;
+            
+
+        }
+        @media (max-width: 768px) {
+            body{
+                display: flex;
+                justify-items: center;
+                align-items: center;
+                flex-direction: column;
+                position: relative;
+            }
+            main,.image-wrap{
+position: relative;
+            }
+          main{
+            
+            width: 100%;
+          }
+        }
+        .file{
+            background-color: rgb(64, 76, 146);
+            color: white;
+        }
+        h1{
+            font-weight: 600;
+            font-size: xx-large;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="file">Image Editor</h1>
+    <div class="image-wrap">
+        <img id="displayImage" style="display: none; max-width: 100%; height: auto;">
+    </div>
+    <main>
+        
+    <input class="file"  type="file" id="imageInput" accept="image/*">
+    <div>
+        <label for="brightness">Brightness:</label>
+        <input type="range" id="brightness" min="0" max="200" value="100">
+    </div>
+    <div>
+        <label for="contrast">Contrast:</label>
+        <input type="range" id="contrast" min="0" max="200" value="100">
+    </div>
+    <div>
+        <label for="negative">Negative:</label>
+        <input type="checkbox" id="negative">
+    </div>
+    <div>
+        <label for="grayscale">Grayscale:</label>
+        <input type="checkbox" id="grayscale">
+    </div>
+    <div>
+        <label for="opacity">Opacity:</label>
+        <input type="range" id="opacity" min="0" max="100" value="100">
+    </div>
+    <button id="apply" style="background-color: aquamarine;">Apply</button>
+    <a id="downloadLink" style="display: none; background-color: rgb(45, 159, 235);" download="modified-image.jpg">Download Image</a>
+    </main>
+    
+
+    <script>
+        const imageInput = document.getElementById("imageInput");
+        const brightnessSlider = document.getElementById("brightness");
+        const contrastSlider = document.getElementById("contrast");
+        const negativeCheckbox = document.getElementById("negative");
+        const grayscaleCheckbox = document.getElementById("grayscale");
+        const opacitySlider = document.getElementById("opacity");
+        const applyButton = document.getElementById("apply");
+        const downloadLink = document.getElementById("downloadLink");
+        const displayImage = document.getElementById("displayImage");
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        let currentImage = null;
+
+        imageInput.addEventListener("change", () => {
+            const file = imageInput.files[0];
+            if (file) {
+                currentImage = new Image();
+                currentImage.src = URL.createObjectURL(file);
+                currentImage.onload = () => {
+                    canvas.width = currentImage.width;
+                    canvas.height = currentImage.height;
+                    ctx.drawImage(currentImage, 0, 0);
+                    displayImage.style.display = "block";
+                    displayImage.src = canvas.toDataURL("image/jpeg");
+                };
+            }
+        });
+
+        function applyChanges() {
+            if (!currentImage) {
+                alert("Please upload an image first.");
+                return;
+            }
+
+            // Reset the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(currentImage, 0, 0);
+
+            // Apply selected image operations based on the slider and checkbox values
+
+            // Apply brightness
+            const brightnessValue = parseFloat(brightnessSlider.value) / 100;
+            ctx.filter = `brightness(${brightnessValue})`;
+
+            // Apply contrast
+            const contrastValue = parseFloat(contrastSlider.value) / 100;
+            ctx.filter += ` contrast(${contrastValue})`;
+
+            // Apply negative effect
+            if (negativeCheckbox.checked) {
+                ctx.filter += " invert(100%)";
+            }
+
+            // Apply grayscale
+            if (grayscaleCheckbox.checked) {
+                ctx.filter += " grayscale(100%)";
+            }
+
+            // Apply opacity
+            const opacityValue = parseFloat(opacitySlider.value) / 100;
+            ctx.globalAlpha = opacityValue;
+
+            // Display the modified image dynamically
+            displayImage.src = canvas.toDataURL("image/jpeg"); // You can choose the format
+
+            // Show the download link
+            downloadLink.style.display = "block";
+            downloadLink.href = displayImage.src;
+        }
+
+        // Listen for input events to apply changes dynamically
+        brightnessSlider.addEventListener("input", applyChanges);
+        contrastSlider.addEventListener("input", applyChanges);
+        negativeCheckbox.addEventListener("input", applyChanges);
+        grayscaleCheckbox.addEventListener("input", applyChanges);
+        opacitySlider.addEventListener("input", applyChanges);
+
+        // Apply changes when the "Apply" button is clicked
+        applyButton.addEventListener("click", applyChanges);
+    </script>
+</body>
+</html>

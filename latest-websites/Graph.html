@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Plotter</title>
+    <!-- Include Plotly.js library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        /* Light theme styles */
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        /* Input field styles */
+        input[type="text"] {
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* Button styles */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+           border: 2px solid whitesmoke;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* background: linear-gradient(45deg,whitesmoke,transparent,rgb(189, 174, 174)); */
+            margin: 5vh 20px;
+        }
+        
+        #plot{
+            background-color: black;
+        }
+        main{
+
+            width: auto;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5vh auto;
+        }
+        h1,label{
+            font-weight: 800;
+            font-size: clamp(14px, 5vw, 24px);
+
+        }
+        i{
+            transform: scale(1.5);
+            border-radius: 50%;
+        }
+        /* Add more dark theme styles as needed */
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Equation Plotter</h1>
+    <div>
+        <label for="equationInput">Enter an equation in terms of 'x' (e.g., x^2 + 2*x + 1):</label><br>
+        <input type="text" id="equationInput" placeholder="Enter equation">
+    </div>
+    <div>
+         <!-- Toggle Theme Button with Icon -->
+         <button onclick="toggleTheme()">
+            <i class="fas fa-adjust"></i> Toggle Theme
+        </button>
+        <!-- Plot Button with Icon -->
+        <button onclick="plotEquation()">
+            <i class="fas fa-chart-line"></i> Plot
+        </button>
+    </div>
+    </main>
+    <div id="plot">
+        
+    </div>
+
+    <script>
+        let isDarkTheme = false;
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const body = document.body;
+         
+            
+            if (isDarkTheme) {
+                body.classList.add('dark-theme');
+               
+                
+            } else {
+                body.classList.remove('dark-theme');
+                
+            }
+            updateChartTheme();
+        }
+
+        function updateChartTheme() {
+            const chart = document.getElementById('plot');
+            if (isDarkTheme) {
+                chart.style.backgroundColor = '#333';
+            } else {
+                chart.style.backgroundColor = '#fff';
+            }
+        }
+
+        function plotEquation() {
+            const equationInput = document.getElementById("equationInput").value;
+            const xValues = [];
+            const yValues = [];
+
+            // Parse and evaluate the equation for a range of x values
+            for (let x = -10; x <= 10; x += 0.1) {
+                xValues.push(x);
+                yValues.push(eval(equationInput.replace('x', x)));
+            }
+
+            // Create a plot using Plotly
+            const data = [{
+                x: xValues,
+                y: yValues,
+                type: 'line',
+                mode: 'lines',
+                marker: { color: 'blue' },
+                name: 'Equation'
+            }];
+
+            const layout = {
+                title: `Plot of ${equationInput}`,
+                xaxis: { title: 'x' },
+                yaxis: { title: 'y' }
+            };
+
+            Plotly.newPlot('plot', data, layout);
+        }
+    </script>
+</body>
+</html>
